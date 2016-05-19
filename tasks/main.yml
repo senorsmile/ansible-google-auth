@@ -1,0 +1,11 @@
+---
+- name: If host running arch or derivative
+  include: arch.yml
+  when: ansible_pkg_mgr == 'pacman'
+  tags: google_auth
+
+- name: If host running ubuntu
+  include: ubuntu_14_04.yml
+  when: ansible_distribution == 'Ubuntu' and ansible_distribution_release == 'trusty'
+  tags: google_auth
+
