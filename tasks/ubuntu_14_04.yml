@@ -27,7 +27,7 @@
     state: present
 
 - name: Generate a timed-based, no reuse, rate-limited (3 logins per 30 seconds) with one concurrently valid code for default user
-  shell: su - "{{ item }}" '-c /usr/bin/google-authenticator -t -f -d --label="{{ item }}@{{ domain }}" --qr-mode=ANSI -r 3 -R 30 -w 1 --secret=/home/{{ item }}/.google_authenticator'
+  shell: su - "{{ item }}" '-c /usr/bin/google-authenticator -t -f -d --label="{{ item }}{% if domain is defined %}@{{ domain }}{% endif %}" --qr-mode=ANSI -r 3 -R 30 -w 1 --secret=/home/{{ item }}/.google_authenticator'
     creates="/home/{{ item }}/.google_authenticator"
   #sudo: yes
   #sudo_user: "{{ item }}"
